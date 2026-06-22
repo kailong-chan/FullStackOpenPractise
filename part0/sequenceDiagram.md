@@ -3,7 +3,7 @@ sequenceDiagram
     participant server
 
 ```mermaid
-graph TD;
+sequence Diagram;
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
     server-->>browser: HTML document
