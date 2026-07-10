@@ -1,41 +1,41 @@
 const App = () => {
-    // const course = 'Half Stack application development'
-    //   const part1 = {
+    const course = 'Half Stack application development'
+    // const part1 = {
     //     name: 'Fundamentals of React',
     //     exercises: 10
-    //   }
-    //   const part2 = {
+    // }
+    // const part2 = {
     //     name: 'Using props to pass data',
     //     exercises: 7
-    //   }
-    //   const part3 = {
+    // }
+    // const part3 = {
     //     name: 'State of a component',
     //     exercises: 14
-    //   }
+    // }
 
-  const course = 'Half Stack application development'
-    const part1 = {
-        name: 'Fundamentals of React',
-        exercises: 10
-    }
-    const part2 = {
-        name: 'Using props to pass data',
-        exercises: 7
-    }
-    const part3 = {
-        name: 'State of a component',
-        exercises: 14
-    }
+    // pass array as props
+    const parts = [
+        {
+            name: 'Fundamentals of React',
+            exercises: 10
+        },
+        {
+            name: 'Using props to pass data',
+            exercises: 7
+        },
+        {
+            name: 'State of a component',
+            exercises: 14
+        }
+    ]
 
-  return (
-      <div>
-        <Header course={course} />
-        <Content part={part1.name} exercises={part1.exercises} />
-        <Content part={part2.name} exercises={part2.exercises} />
-        <Content part={part3.name} exercises={part3.exercises} />
-        <Total exercises={part1.exercises + part2.exercises + part3.exercises} />
-      </div>
-  )
+    return (
+        <div>
+            <Header course={course} />
+            {/*<Total exercises={part1.exercises + part2.exercises + part3.exercises} />*/}
+            <Content parts={parts} />
+        </div>
+    )
 }
 
 // render the name of the course
@@ -44,9 +44,15 @@ const Header = (props) => (
 )
 
 // render the parts and the number of exercise
-const Content = (props) => (
-    <p>{props.part} {props.exercises}</p>
-)
+const Content = ({parts}) => {
+    return (
+        <div>
+            <p>{parts[0].name} {parts[0].exercises}</p>
+            <p>{parts[1].name} {parts[1].exercises}</p>
+            <p>{parts[2].name} {parts[2].exercises}</p>
+        </div>
+    )
+}
 
 // render the total number of exercise
 const Total = (props) => (
