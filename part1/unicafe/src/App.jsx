@@ -49,9 +49,10 @@ const Button = ({text, onClick}) => (
 )
 
 const Stat = ({text, count}) => (
-    <div>
-        <p>{text} {count}</p>
-    </div>
+    <tr>
+        <td>{text}</td>
+        <td>{count}</td>
+    </tr>
 )
 
 export default App
