@@ -9,6 +9,18 @@ const App = () => {
     const averageCount = (goodCount - badCount) / totalCount
     const positivePercentage = `${(goodCount / totalCount) * 100}%`
 
+    if(totalCount === 0)
+        return (
+            <>
+                <Title text="give feedback" />
+                <Button text="good" onClick={() => setGoodCount(goodCount + 1)} />
+                <Button text="neutral" onClick={() => setNeutralCount(neutralCount + 1)} />
+                <Button text="bad" onClick={() => setBadCount(badCount + 1)} />
+                <Title text="statistics" />
+                <p>No feedback given</p>
+            </>
+        )
+
     return (
         <>
             <Title text="give feedback" />
