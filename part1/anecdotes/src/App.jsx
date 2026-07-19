@@ -21,10 +21,27 @@ const App = () => {
         return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
     }
 
+    const getRandomAnecdotes = () => {
+        setSelected(getRandomInt(0, anecdotes.length))
+    }
+
+    //create a zero-filled array to store the state for each anecdote vote count, preserving state using useState
+    const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
+
+    // handler to increment vote count for the currently selected anecdote
+    const voteSelectedAnecdote = () => {
+        // make a copy of the array to update state stored in complex data structure, in this case : array
+        const voteCopy = [...votes] // we use IMMUTABLE copy so React will be able to detect changes and re-render
+        voteCopy[selected] += 1
+        setVotes(voteCopy)
+    }
+
     return (
         <div>
-            <Display text={anecdotes[selected]} />
-            <Button text="next anecdote" action={() => setSelected(getRandomInt(0, anecdotes.length))} />
+            <DisplayAnecdote text={anecdotes[selected]} />
+            <Button text="vote" action={voteSelectedAnecdote}/>
+            <Button text="next anecdote" action={getRandomAnecdotes} />
+            <DisplayVote voteCount={votes[selected]} />
         </div>
     )
 }
@@ -32,7 +49,10 @@ const App = () => {
 const Button = ({text, action}) =>
     <button onClick={action}>{text}</button>
 
-const Display = ({text}) =>
+const DisplayAnecdote = ({text}) =>
     <p>{text}</p>
+
+const DisplayVote = ({voteCount}) =>
+    <p>has {voteCount} votes</p>
 
 export default App
