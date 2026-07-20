@@ -41,7 +41,7 @@ const App = () => {
     }
 
     const highestVoteCount = () => {
-        return Math.max(selected)
+        return Math.max(...votes)
     }
 
     return (
@@ -49,10 +49,10 @@ const App = () => {
             <Title text="Anecdote of the day" />
             <DisplayAnecdote text={anecdotes[selected]} />
             <DisplayVote voteCount={votes[selected]} />
-            <Button text="vote" action={voteSelectedAnecdote}/>
+            <Button text="vote" action={voteSelectedAnecdote}/> {/*event handler*/}
             <Button text="next anecdote" action={getRandomAnecdotes} />
             <Title text="Anecdote with most votes" />
-            <DisplayAnecdote text={mostVotedAnecdotes()} />
+            <DisplayAnecdote text={mostVotedAnecdotes()} /> {/*event listener*/}
             <DisplayVote voteCount={highestVoteCount()} />
         </div>
     )
