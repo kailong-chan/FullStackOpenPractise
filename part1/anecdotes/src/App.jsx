@@ -36,12 +36,24 @@ const App = () => {
         setVotes(voteCopy)
     }
 
+    const mostVotedAnecdotes = () => {
+        return anecdotes[votes.indexOf(Math.max(...votes))]
+    }
+
+    const highestVoteCount = () => {
+        return Math.max(selected)
+    }
+
     return (
         <div>
+            <Title text="Anecdote of the day" />
             <DisplayAnecdote text={anecdotes[selected]} />
+            <DisplayVote voteCount={votes[selected]} />
             <Button text="vote" action={voteSelectedAnecdote}/>
             <Button text="next anecdote" action={getRandomAnecdotes} />
-            <DisplayVote voteCount={votes[selected]} />
+            <Title text="Anecdote with most votes" />
+            <DisplayAnecdote text={mostVotedAnecdotes()} />
+            <DisplayVote voteCount={highestVoteCount()} />
         </div>
     )
 }
@@ -54,5 +66,9 @@ const DisplayAnecdote = ({text}) =>
 
 const DisplayVote = ({voteCount}) =>
     <p>has {voteCount} votes</p>
+
+const Title = ({text}) =>
+    <h1>{text}</h1>
+
 
 export default App
