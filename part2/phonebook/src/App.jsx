@@ -2,13 +2,18 @@ import { useState } from 'react'
 
 const App = () => {
     const [persons, setPersons] = useState([
-        { name: 'Arto Hellas' },
-        { name: 'Ada Lovelace' }
+        { name: 'Arto Hellas', number: '040-123456', id: 1 },
+        { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 }
     ])
     const [newName, setNewName] = useState('')
+    const [newNumber, setNewNumber] = useState('')
 
     const handleNameChange = (e) => {
         setNewName(e.target.value)
+    }
+
+    const handleNumberChange = (e) => {
+        setNewNumber(e.target.value)
     }
 
     const addNewPerson = (e) => {
@@ -23,8 +28,9 @@ const App = () => {
             return
         }
 
-        setPersons(persons.concat({name: trimmedName}))
+        setPersons(persons.concat({name: trimmedName, number: newNumber}))
         setNewName('')
+        setNewNumber('')
     }
 
     return (
@@ -34,11 +40,13 @@ const App = () => {
                 onSubmit={addNewPerson}
                 newName={newName}
                 onNameChange={handleNameChange}
+                newNumber={newNumber}
+                onNumberChange={handleNumberChange}
             />
             <Title title="Numbers" />
             <div>
                 {persons.map(person =>
-                    <PersonName person={person} key={person} />
+                    <Person name={person.name} number={person.number} key={person.id}/>
                 )}
             </div>
         </div>
@@ -48,19 +56,22 @@ const App = () => {
 const Title = ({title}) =>
     <h2>{title}</h2>
 
-const AddPerson = ({onSubmit, newName, onNameChange}) => {
+const AddPerson = ({onSubmit, newName, onNameChange, newNumber, onNumberChange}) => {
     return (
         <form onSubmit={onSubmit}>
             <div>
                 name: <input value={newName} onChange={onNameChange}/>
+            </div>
+            <div>
+                number: <input value={newNumber} onChange={onNumberChange}/>
             </div>
             <button type="submit">add</button>
         </form>
     )
 }
 
-const PersonName = ({person}) => (
-    <p key={person.name}>{person.name}</p>
+const Person = ({name, number}) => (
+    <p>{name} {number}</p>
 )
 
 export default App
