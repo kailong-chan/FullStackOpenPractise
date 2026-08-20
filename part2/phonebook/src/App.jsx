@@ -20,6 +20,7 @@ const App = () => {
 
         if (persons.some(person => person.name === trimmedName)){
             alert(`${trimmedName} is already added to phonebook`)
+            return
         }
 
         setPersons(persons.concat({name: trimmedName}))
