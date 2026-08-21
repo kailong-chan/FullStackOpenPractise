@@ -3,7 +3,9 @@ import { useState } from 'react'
 const App = () => {
     const [persons, setPersons] = useState([
         { name: 'Arto Hellas', number: '040-123456', id: 1 },
-        { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 }
+        { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+        { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+        { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
     ])
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
@@ -35,28 +37,27 @@ const App = () => {
 
     return (
         <div>
-            <Title title={"Phonebook"} />
-            <AddPerson
+            <h2>Phonebook</h2>
+            <p>filter shown with <input/></p>
+            <h2>add a new</h2>
+            <PersonForm
                 onSubmit={addNewPerson}
                 newName={newName}
                 onNameChange={handleNameChange}
                 newNumber={newNumber}
                 onNumberChange={handleNumberChange}
             />
-            <Title title="Numbers" />
+            <h2>Numbers</h2>
             <div>
                 {persons.map(person =>
-                    <Person name={person.name} number={person.number} key={person.id}/>
+                    <Persons name={person.name} number={person.number} key={person.id}/>
                 )}
             </div>
         </div>
     )
 }
 
-const Title = ({title}) =>
-    <h2>{title}</h2>
-
-const AddPerson = ({onSubmit, newName, onNameChange, newNumber, onNumberChange}) => {
+const PersonForm = ({onSubmit, newName, onNameChange, newNumber, onNumberChange}) => {
     return (
         <form onSubmit={onSubmit}>
             <div>
@@ -70,7 +71,7 @@ const AddPerson = ({onSubmit, newName, onNameChange, newNumber, onNumberChange})
     )
 }
 
-const Person = ({name, number}) => (
+const Persons = ({name, number}) => (
     <p>{name} {number}</p>
 )
 
